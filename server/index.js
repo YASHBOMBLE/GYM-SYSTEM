@@ -94,7 +94,7 @@ app.post('/signup', async (req, res) => {
     // validation to check if email already exists ends here
 
     // validation to check if phone already exists starts here
-    const existingUserPhone = await User.findOne({ phone: phone });
+    const existingUserPhone = await user.findOne({ phone: phone });
     if (existingUserPhone) {
         return res.json({
             success: false,
@@ -113,12 +113,21 @@ app.post('/signup', async (req, res) => {
     })
 
     const savedUser = await user.save();
-
-    res.json({
-        success: true,
-        message: "User created successfully",
-        data: savedUser
-    })
+    if(savedUser)
+    {
+        res.json({
+            success: true,
+            message: "User created successfully",
+            data: savedUser
+        })
+    }
+    else{
+        res.json({
+            success: false,
+            message: "User created successfully",
+        })
+    }
+ 
 })
 
 app.post('/login', async (req, res) => {
