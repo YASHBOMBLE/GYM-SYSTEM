@@ -38,7 +38,7 @@ app.post('/sendmail', (req, res) => {
             secure: false, // true for 465, false for other ports
             auth: {
                 user: "yashbomble2003@gmail.com", // generated ethereal user
-                pass: "ijzxjotdlimneqdy" // generated ethereal password
+                pass: "" // generated ethereal password
             },
         });
 
