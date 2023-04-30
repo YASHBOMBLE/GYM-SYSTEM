@@ -5,7 +5,8 @@ const exerciseSchema = new Schema({
   day : String,
   exername : String,
   sets : String,
-  imgUrl : String
+  imgUrl : String,
+  dayId : String
 }, { timestamps: true },{Location:true})
 
 const Exercise = model("Exercise", exerciseSchema)

@@ -18,7 +18,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URL, () => {
+mongoose.connect("mongodb+srv://yashbomble:yash2002@cluster0.mt2buo2.mongodb.net/GymSystem", () => {
     console.log('Connected to MongoDB');
 })
 
@@ -70,6 +70,56 @@ app.post('/sendmail', (req, res) => {
 })
 
 
+app.post('/validate',async(req,res)=>{
+    const { name, phone, email, password, role } = req.body;
+//Name VAlidation
+    if(!validator.isAlpha(name) )
+    {
+        return res.json({
+            success: false,
+            message: "Name is in String"
+        })
+    }
+   
+    
+    
+    //password validation
+
+    if(!validator.isStrongPassword(password))
+    {
+        return res.json({
+            success: false,
+            message: "Password Contains letters A-Z a-z 0-9 or Special Symbol (minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1)"
+        })
+    }
+    
+    //Email validation
+  
+    
+    
+//Phone number Validation
+    if(validator.isAlpha(phone))
+    {
+        return res.json({
+            success: false,
+            message: "Mobile number Must be in Digit"
+        })
+    }
+   
+
+    if (phone.length < 10 || phone.length >= 11) {
+        return res.json({
+            success: false,
+            message: "Mobile No Must be 10 Digit"
+        })
+    }
+
+    res.json({
+        success: true,
+        message: "User created successfully"
+    })
+})
+
 //validation api
 
 app.post('/signup', async (req, res) => {
@@ -107,7 +157,7 @@ app.post('/signup', async (req, res) => {
 
     // validation to check if phone already exists starts here
     
-    const existingUserPhone = await user.findOne({ phone: phone });
+    const existingUserPhone = await User.findOne({ phone: phone });
     if (existingUserPhone) {
         return res.json({
             success: false,
@@ -209,13 +259,14 @@ app.get('/viewtrainer',async (req,res)=>{
 })
 
 app.post('/addexercise', async(req,res)=>{
-    const {uname,day,exername,sets,imgUrl} = req.body;
+    const {uname,day,exername,sets,imgUrl,dayId} = req.body;
     const exercise = new Exercise({
         uname: uname,
         day : day,
         exername : exername,
         sets : sets,
-        imgUrl : imgUrl
+        imgUrl : imgUrl,
+        dayId : dayId
     })
 
     const savedExercise = await exercise.save();
@@ -275,9 +326,62 @@ app.get('/viewmessage', async(req,res)=>{
 
 })
 
+app.post("/sendmail", async (req,res)=>{
+    const {mailId} = req.body;
+    async function main() {
+      const otp = Math.floor(Math.random() * 9000) + 1000;
+  
+      let testAccount = await nodemailer.createTestAccount();
+    
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: "yashbomble2003@gmail.com", // generated ethereal user
+          pass: "ehutwdxuxvfzzfvd" // generated ethereal password
+        },
+      });
+    
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: '"GYM" yashbomble@.com', // sender address
+        to: mailId, // list of receivers
+        subject: "OTP Verification ✔", // Subject line
+        text: " ", // plain text body
+        html: "<b>Your Otp for Mail Verification is </b>"+"<h1>"+otp+"<h1>", // html body
+      });
+    
+      if(info)
+      {
+        return res.json({
+          success : true,
+          message : "mail sent",
+          data : info.messageId
+        })
+      }else
+      {
+        return res.json({
+            success : false,
+            message : "Error"
+        })
+      }
+      
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    
+      // Preview only available when sending through an Ethereal account
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    }
+    
+    main().catch(console.error);
+  })
+  
+
 //api routes end here
 
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })

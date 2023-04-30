@@ -1,0 +1,85 @@
+.home-title{
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    letter-spacing: 3px;
+    box-shadow: 0px 0px 4px #808088;
+    padding: 7px;
+}
+.dayname{
+    display: block;
+    font-size: 16px;
+    margin: 15px;
+}
+.dayname:hover{
+    cursor: pointer;
+    color: rgb(95, 88, 88);
+}
+.Dayscontainer{
+  margin-top: 10px;
+  box-shadow: 0px 0px 4px #808088;
+  padding: 10px;
+  margin: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.exer-img{
+    height: 370px;
+    width: 700px;
+    border-radius: 9px;
+}
+.exer-img1{
+    height: 300px;
+    width: 350px;
+    border-radius: 9px;
+}
+.dayexer{
+    position: relative;
+    top: 20px;
+    right: 100px;
+}
+.viewExer{
+    display: flex;
+    justify-content: center;
+    
+}
+.day-title{
+ display: flex;
+ justify-content: center;
+}
+.tag-line{
+    font-size: 35px;
+    letter-spacing: 3px;
+    text-align: center;
+    font-family: 'Times New Roman';
+}
+.center-text{
+    text-align: center;
+}
+.tag-line-container{
+    display: block;
+}
+.card-container{
+    margin: 8px;
+    border: 1px solid black;
+    border-radius: 9px;
+    box-shadow: 0px 0px 5px #808088;
+    padding: 8px;
+    text-align: center;
+}
+.card-img{
+    border-radius: 5px;
+    margin: 8px;
+    height: 120px;
+    width: 140px;
+}
+.logout-btn{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+.logOut-text{
+    display: inline;
+    letter-spacing: 5px;
+}
