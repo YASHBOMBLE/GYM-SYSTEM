@@ -5,7 +5,7 @@ function Footer() {
     <div><div className='footer-container navcurv'   >
     <hr />
     <div className='text-center'>
-        Copyright © 2023 || Developed By Sakshi And Team . . . 
+        Copyright © 2023 || Developed By Sakshi And Team...
     </div>
   </div></div>
   )
