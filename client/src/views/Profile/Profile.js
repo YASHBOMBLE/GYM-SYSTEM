@@ -3,24 +3,29 @@ import { currentUser } from '../../util/currentUser'
 import Footer from '../../component/Footer/Footer';
 import Navbar from '../../component/Navbar/Navbar';
 import { loginRequired } from '../../util/LoginRequired';
+import './Profile.css'
+import user from './../../images/user.png'
+import Select from 'react-select';
 
+import { Link } from 'react-router-dom';
 
 function Profile() {
+
+   
   useEffect(()=>{
     loginRequired();
   },[])
-  //<img src={user} className='user-img' />
+
   function logOut() {
     localStorage.removeItem('currentUser');
     window.location.href = '/login'
   }
   
-  function addexercise()
-  {
-    
-  
+ 
+
+  function viewexercise(){
+    window.location.href='/viewexercise'
   }
-  
   
   
   function adminView() {
@@ -33,11 +38,11 @@ function Profile() {
                 </h3>
                 <hr />
                 <div class="d-grid gap-2 logout-btn">
-                    <button className='btn btn-primary' onClick={addexercise}>Add Exercise</button>
-                    <button className='btn btn-primary' onClick={addexercise}>Add Trainer</button>
-                    <button className='btn btn-primary' onClick={addexercise}>View Exercise</button>
-                    <button className='btn btn-primary' onClick={addexercise}>View Trainetr</button>
-  
+                <Link to ='/addexercise'>  <button className='btn btn-primary witd-btn' >Add Exercise</button></Link>
+                    <Link to ='/addtrainer'>    <button className='btn btn-primary witd-btn' >Add Trainer</button></Link>
+                    <Link to ='/viewexercise'> <button className='btn btn-primary witd-btn' >View Exercise</button></Link>
+                    <Link to ='/vewTrainer'> <button className='btn btn-primary witd-btn' >View Trainer</button></Link>
+                    <Link to ='/vewUsers'> <button className='btn btn-primary witd-btn' >View User</button> </Link>
                 </div>
   
   
@@ -52,9 +57,10 @@ function Profile() {
      <div className='row'>
                 <div className='col-md-12 main-container'>
                     <div className='sub-container'>
+                    
                         <div className='profile-container'>
                             <div className='profile-img-conatiner'>
-                                
+                            <img src={user} className='user-img' />
                             </div>
                             <hr />
                             <span className='user-info size'>Welcome  {currentUser?.name} </span>
@@ -62,15 +68,18 @@ function Profile() {
                             <span className='user-info'>Email : {currentUser?.email} </span>
                             <br />
                             <span className='user-info'>Phone No : {currentUser?.phone}</span> <br />
+                            <span className='user-info'>Weight : {currentUser?.weight} Kg</span> <br />
                             <span className='user-info'>Role : {currentUser?.role}</span>
                             <hr />
 
                             <span>
                                 {
                                     adminView()
+                                    
                                 }
 
                             </span>
+                            
                             <div class="d-grid gap-2 logout-btn mt-3">
                     
                                 <button type="button" className='btn btn-primary' onClick={logOut}><p className='logOut-text'>Logout</p><i class="fa-solid fa-right-from-bracket"></i></button>

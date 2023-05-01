@@ -3,13 +3,14 @@ import axios from 'axios'
 import swal from 'sweetalert';
 import { currentUser } from '../../util/currentUser';
 import "./Signup.css"
-import {
-  generateOTP
-} from '../../util/genarateOTP';
+import signup from './../../images/sign-up-form.svg'
+
 
 import { Link, useFetcher } from 'react-router-dom';
 
 import Marquee from "react-fast-marquee";
+import Footer from '../../component/Footer/Footer';
+import Navbar from '../../component/Navbar/Navbar';
 
 function Signup() {
 
@@ -18,7 +19,7 @@ function Signup() {
   const [weight, setWeight] = useState('')
   const [age, setAge] = useState('')
 
-  const myOTP = generateOTP();
+
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
@@ -108,21 +109,15 @@ function Signup() {
 
   return (
     <div>
-
+<Navbar />
       <br></br>
 
-
-
+    
       <div className='row'>
-        <div className=' text-center col-md-12'>
-          <Marquee speed={52} text="swetha" className='marquee-text text-center'><p class="marquee-tag-text">Enter Valid Details To Continue &nbsp;&nbsp;Password Contains : A-Z a-z 0-9 One Special Symbol </p> </Marquee>
+        <div className='col-md-6'>
+        <img src={signup} className='img-fluid img-container'/>
         </div>
-      </div>
-      <div className='row'>
-        <div className='col-md-4'>
-
-        </div>
-        <div className='col-md-4 main-info-container'>
+        <div className='col-md-6 main-info-container'>
 
 
           <div className='form-container'>
@@ -196,7 +191,7 @@ function Signup() {
 
         </div>
       </div>
-
+      <Footer />
     </div>
   )
 }

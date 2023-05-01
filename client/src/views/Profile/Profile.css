@@ -1,0 +1,50 @@
+.profile-container{
+    padding: 20px;
+    box-shadow: 0px 0px 5px 2px #808080;
+    width: auto;
+    margin-top: 25px;
+   border-radius: 7px;
+}
+.user-img{
+    height: 90px;
+}
+.profile-img-conatiner{
+    display: flex;
+    justify-content: center;
+    margin:30px;
+}
+.admin-view{
+    text-align: center;
+}
+.user-info{
+    font-weight: bold;
+    line-height: 30px;
+    word-spacing: 3px;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+}
+.main-container{
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.size{
+    font-size: 27px;
+    color: purple;
+}
+.sub-container{
+    display: flex;
+    justify-content: center;
+}
+.admin-view-conatiner{
+    color: aliceblue;
+    margin-top: 20px;
+    background: linear-gradient(to bottom, #a09b9b 0%, black 100%);
+
+}
+.add-food-item-btn{
+    width: 100%;
+}
+.witd-btn{
+    width: 100%;
+}

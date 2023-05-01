@@ -18,7 +18,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect("process.env.MONGODB_URL", () => {
+mongoose.connect(process.env.MONGODB_URL, () => {
     console.log('Connected to MongoDB');
 })
 
@@ -220,12 +220,13 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/addTrainer', async (req, res) => {
-    const { name, category, phone } = req.body;
+    const { name, category, phone,email } = req.body;
 
     const trainer = new Trainer({
         name: name,
         category: category,
-        phone: phone
+        phone: phone,
+        email : email
     })
 
     const savedTrainer = await trainer.save();
@@ -258,15 +259,24 @@ app.get('/viewtrainer',async (req,res)=>{
     }) 
 })
 
+app.get('/users', async (req,res)=>{
+    const user = await User.find();
+
+    res.json({
+        success : true,
+        message : "trainers fetch successfully",
+        data : user
+    })
+})
 app.post('/addexercise', async(req,res)=>{
     const {uname,day,exername,sets,imgUrl,dayId} = req.body;
     const exercise = new Exercise({
-        uname: uname,
-        day : day,
-        exername : exername,
-        sets : sets,
-        imgUrl : imgUrl,
-        dayId : dayId
+        uname: uname || null,
+        day : day || null,
+        exername : exername || null,
+        sets : sets || null,
+        imgUrl : imgUrl || null,
+        dayId : dayId || null
     })
 
     const savedExercise = await exercise.save();

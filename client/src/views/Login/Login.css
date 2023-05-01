@@ -23,14 +23,15 @@ body{
    
   }
   .form-container {
-    background: linear-gradient(20deg, rgb(227, 160, 227) 17%, #eeedf4 80%);
+    background: linear-gradient(109.6deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);
+    
     width: 400px;
     padding: 20px;
     border-radius: 8px;
     margin-left:auto;
     margin-right:auto;
     box-shadow: 4px 5px 2px 1px #808080;
-    color: rgb(74, 70, 70);
+    color: azure;
     border: 1px solid white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -183,3 +184,7 @@ body{
     color: white;
     font-size: 18px;
   }
+.login-img{
+height: 500px;
+border-radius: 9px;
+}

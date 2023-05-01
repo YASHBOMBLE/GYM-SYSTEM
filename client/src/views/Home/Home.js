@@ -6,43 +6,30 @@ import bg1 from "./../../images/bg1.jpg"
 import Navbar from '../../component/Navbar/Navbar';
 import Footer from '../../component/Footer/Footer';
 import { currentUser } from './../../util/currentUser'
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
 function Home() {
 
-  const [currentExercise,setAllexercise] = useState([])
-  
+  const [currentExercise, setAllexercise] = useState([])
 
-  const Days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+  const Days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
   async function fetchAllItems() {
-    const response = await axios.get('/viewexercise')
+    const response = await axios.get('viewexercise')
     setAllexercise(response.data.data)
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchAllItems();
-  },[])
+  }, [])
 
- 
+
   const [imageNum, setImageNum] = useState(1);
-  const sliderImages = [
-     {
-        url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fgym&psig=AOvVaw2Yul5iO_JtncIWEjqzBeO8&ust=1682948745470000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJCrvefe0f4CFQAAAAAdAAAAABAQ",
-     },
-     {
-        url: "https://media.istockphoto.com/id/1437851885/photo/weight-training-equipment-in-a-modern-gym.jpg?s=1024x1024&w=is&k=20&c=U-xQFJDSVe8fMmW67yq7vL7pu9mtK9s-g7QozeUrYx8=",
-     },
-     {
-        url: "https://encryptedtbn0.gstatic.com/images?q=tbn:ANd9GcSprPgYofGmXXPfuEDcZ_XI294n0bME5dTX9TGvINmPiA&s",
-     },
-     {
-        url: "https://i.pinimg.com/474x/81/ca/47/81ca47eaae35615ba9a9bb57560aaa3c.jpg",
-     },
-     {
-        url: "https://encryptedtbn0.gstatic.com/images?q=tbn:ANd9GcTof2fniv0mZzN8DByLmb6ILU4MvV_SGr_wptMeAut_dPaYMBkeHnHhD5egzU7MB0GSqE&usqp=CAU",
-     },
-  ];
+
 
   async function logOut() {
-    
+
     localStorage.removeItem('currentUser');
     window.location.href = '/login'
   }
@@ -51,100 +38,130 @@ function Home() {
     window.location.href = '/login'
   }
 
+
+  const spanStyle = {
+    padding: '20px',
+    background: '#efefef',
+    color: '#000000'
+  }
+
+  const divStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    height: '300px',
+    marginBottom: '20px'
+  }
+  const slideImages = [
+    {
+      url: 'https://www.palco23.com/files/2020/19_redaccion/fitness/the%20gym/the-gym-728.jpg',
+      caption: 'Decide. Commit. Succeed.'
+    },
+    {
+      url: 'https://img.freepik.com/free-photo/strong-man-training-gym_1303-23478.jpg?w=2000',
+      caption: 'Make yourself stronger than your excuses'
+    },
+    {
+      url: 'https://inspirefitnessacademy.co.uk/wp-content/uploads/2021/05/danielle-cerullo-CQfNt66ttZM-unsplash-1536x1024.jpg',
+      caption: 'Power, perseverance, and discipline'
+    },
+  ];
+
   return (
-    
+
     <div>
       <Navbar />
       <div className='row'>
-       <div className='col-md-4'>
+        <div className='col-md-12'>
+          <div className="slide-container">
+            <Slide>
+              {slideImages.map((slideImage, index) => (
+                <div key={index}>
+                  <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                    <span style={spanStyle}>{slideImage.caption}</span>
+                  </div>
+                </div>
+              ))}
+            </Slide>
+          </div>
+        </div>
+      </div>
+      <div className='row mt-4'>
+        <div className='col-md-6'>
           <div className='text-center home-title'>Days</div>
           <div className='Dayscontainer'>
-          <span className='day-title'>Working Days</span>
-          <hr />
-          {
-            Days?.map((index,item)=>{
-              return (
-              
-                <>
-              
-                <span className='dayname' >{index}</span> 
-                </>
-              )
-            })
-          }
-          </div>
-       </div>
-       <div className='col-md-4 viewExer'>
-       <div className='viewExer '>
-       <SimpleImageSlider
-            width={500}
-            height={350}
-            images={sliderImages}
-            showBullets={true}
-            showNavs={true}
-            autoPlay={true} 
-          
-               autoPlayDelay = {3}
-         />
-       </div>
+            <span className='day-title'>Working Days</span>
+            <hr />
+            {
+              Days?.map((index, item) => {
+                return (
 
-        
-       </div>
-       <div className='col-md-4'>
-       <div className='text-center home-title'>Exercise</div>
-       <div className='Dayscontainer'>
-       {
-              currentExercise?.map((index,item)=>{
-                return(
-                    <>
-                    
-                   <span className='d-block mt-3'>{index.exername}</span>
+                  <>
+
+                    <span className='dayname' >{index}</span>
                   </>
                 )
               })
             }
-       </div>
-       </div>
+          </div>
+        </div>
        
+        <div className='col-md-6'>
+          <div className='text-center home-title'>Exercise</div>
+          <div className='Dayscontainer exer-container'>
+            {
+              currentExercise?.map((index, item) => {
+                return (
+                  <>
+
+                    <span className='d-block mt-3'>{index.exername}</span>
+                  </>
+                )
+              })
+            }
+          </div>
+        </div>
+
       </div>
       <hr />
       <div className='row'>
-            <div className='col-md-12'>
-              <div className='tag-line-container'></div>
-              <span className='tag-line d-block'>No pain no gain</span>
-              <span className=' center-text d-block'>Available Exercises</span>
-            </div>
+        <div className='col-md-12'>
+          <div className='tag-line-container'></div>
+          <span className='tag-line d-block'>No pain no gain</span>
+          <span className=' center-text d-block'>Available Exercises</span>
+        </div>
       </div>
       <hr />
       <div className='row'>
-      
-   
-      {
-              currentExercise?.map((index,item)=>{
-                const url = index.imgUrl;
-                return(
-                    <>
-                   <div className='col-md-3'>
-                    <div className='card-container'>
+
+
+        {
+          currentExercise?.map((index, item) => {
+            const url = index.imgUrl;
+            return (
+              <>
+                <div className='col-md-3'>
+                  <div className='card-container'>
                     <span className='d-block mt-3'>{index.exername}</span>
                     <img src={url} className='img-fluid card-img' />
                     <span className='d-block mt-3'>Sets : {index.sets}</span>
-                    </div>
-                   
-                   </div>
-                  </>
-                )
-              })
-            }
+                  </div>
+
+                </div>
+              </>
+            )
+          })
+        }
       </div>
       <div class="d-grid gap-2 logout-btn">
         <button type="button" className='btn btn-primary' onClick={logOut}><p className='logOut-text'>Logout</p><i class="fa-solid fa-right-from-bracket"></i></button>
 
       </div>
-<Footer />     
-      </div>
-      
-  
+      <Footer />
+    </div>
+
+
   )
 }
 

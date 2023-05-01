@@ -1,6 +1,20 @@
 .background{
-    background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(20,94,291,1) 0%, rgba(59,91,231,1) 4%);
-
-
+  background: linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+  color: azure;
+  }
+  .nav-logout{
+    cursor: pointer;
+  }
+  .logoImg{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+  }
+  .navcurv{
+    
+    border-radius: 4px;
+  }
+  .positionskty{
+    position: sticky;
+    top : 0px;
   }
