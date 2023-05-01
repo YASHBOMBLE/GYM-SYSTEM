@@ -9,6 +9,8 @@ import Trainer from './models/Trainer.js';
 import Contact from './models/Contact.js';
 import Exercise from './models/Exercise.js'
 import nodemailer from 'nodemailer'
+import path from 'path';
+const __dirname = path.resolve();
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -391,6 +393,11 @@ app.post("/sendmail", async (req,res)=>{
 
 //api routes end here
 
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+  });
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
