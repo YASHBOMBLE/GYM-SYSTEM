@@ -1,8 +1,7 @@
 .footer-container{
-    height : 60px;
+    height : 75px;
     color: aliceblue;
     background: linear-gradient(to right, #6b6a6a 0%, black 100%);
- 
 }
 .navcurv{
     border-radius: 4px;
