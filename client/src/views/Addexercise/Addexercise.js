@@ -111,6 +111,10 @@ function Addexercise() {
                                 </div>
                                 <hr />
                                 <button type='button' className='login-button btn-width' onClick={addexercise}>Add / Assign exercise </button>
+                           <div className='notecontainer'>
+                           <b className='note'>Note : For Optional Field Enter Na.</b>
+                           </div>
+                           
                            </form>
                           
                         </div>

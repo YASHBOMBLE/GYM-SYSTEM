@@ -43,6 +43,7 @@ function Profile() {
                     <Link to ='/viewexercise'> <button className='btn btn-primary witd-btn' >View Exercise</button></Link>
                     <Link to ='/vewTrainer'> <button className='btn btn-primary witd-btn' >View Trainer</button></Link>
                     <Link to ='/vewUsers'> <button className='btn btn-primary witd-btn' >View User</button> </Link>
+                    <Link to ='/messageview'> <button className='btn btn-primary witd-btn' >View Messages</button> </Link>
                 </div>
   
   
