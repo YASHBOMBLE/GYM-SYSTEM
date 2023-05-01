@@ -61,11 +61,11 @@ function Login() {
       </div>
       <hr />
 
-      <div className='row m-1 size-form-container'>
+      <div className='row m-1  login-container'>
 
         <div className='col-md-6'>
           <div className='login-form-container'>
-            <div className='form-container main-form-container mt-3 '>
+            <div className=' size-form-container main-form-container mt-3 '>
               <form>
                 <div className='form-title' >
                   Login
