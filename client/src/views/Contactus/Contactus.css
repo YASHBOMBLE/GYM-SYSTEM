@@ -1,0 +1,22 @@
+.contactus-container{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+.form-text{
+    font-size: 24px;
+}
+.textarea-height{
+    height: 90px;
+}
+.btn-widt{
+    width:50%;
+    margin: 10px;
+}
+.container-width{
+    width: 400px;
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+}
