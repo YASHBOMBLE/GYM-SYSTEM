@@ -10,6 +10,7 @@ import Addexercise from './views/Addexercise/Addexercise.js';
 import Viewtrainer from './views/Viewtrainer/Viewtrainer.js';
 import Viewusers from './views/Viewusers/Viewusers.js';
 import Contactus from './views/Contactus/Contactus.js';
+import Messageview from './views/Messageview/Messageview.js';
 function App() {
   return (
     <div>
@@ -25,8 +26,8 @@ function App() {
           <Route path="/vewTrainer" element={<Viewtrainer />} />
           <Route path="/vewUsers" element={<Viewusers />} />
           <Route path="/contactus" element={<Contactus />} />
-
-
+          <Route path="/contactus" element={<Contactus />} />
+          <Route path="/messageview" element={<Messageview/>} />
         </Routes>
       </BrowserRouter>
     </div>

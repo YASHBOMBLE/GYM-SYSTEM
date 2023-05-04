@@ -8,6 +8,7 @@ import swal from 'sweetalert'
 import './Addexercise.css'
 
 
+
 function Addexercise() {
     useEffect(() => {
         loginRequired();
@@ -30,6 +31,17 @@ function Addexercise() {
         { label: "Sunday", value: 7 }
     ];
 
+    const Exercises = [
+        { label: "Pilates", value: 1 },
+        { label: "Push-up", value: 2 },
+        { label: "Squats", value: 3 },
+        { label: "Lunge", value: 4 },
+        { label: "Plank", value: 5 },
+        { label: "Aerobics", value: 6 },
+        { label: "Bench press", value: 7 }
+    ];
+
+
 
     async function addexercise() {
         const response = await axios.post('/addexercise',{
@@ -43,7 +55,6 @@ function Addexercise() {
  
         const status = response.data.success;
         if (response.data.success) {
- 
          await swal({
            title: "Success",
            text: response.data.message,
@@ -55,8 +66,6 @@ function Addexercise() {
           setDay(null);
           setSets('');
           setUrl('');
-          
-
        }
        else
        {
@@ -91,11 +100,9 @@ function Addexercise() {
                                     <input type='text' id='uname' placeholder='User Name / Optional' className='user-input'
                                         value={uname} onChange={(e) => setUname(e.target.value)} />
                                 </div>
-                                <div>
-                                    <label htmlFor='name'>Name of Exercise :  </label>
-                                    <input type='text' id='name' placeholder='Name' className='user-input'
-                                        value={name} onChange={(e) => setName(e.target.value)} />
-                                </div>
+                                <label htmlFor='uname'>Select Exercise :  </label>
+                                <Select options={Exercises} id='class' placeholder='Select Exercise' className='user-input text-color' onChange={setName} />
+
                                 <label htmlFor='class'>Select Day : </label>
 
                                 <Select options={Countries} id='class' placeholder='Select Day' className='user-input text-color' onChange={setDay} />
@@ -105,7 +112,7 @@ function Addexercise() {
                                         value={sets} onChange={(e) => setSets(e.target.value)} />
                                 </div>
                                 <div>
-                                    <label htmlFor='url'>Name of Exercise :  </label>
+                                    <label htmlFor='url'>Image Url :  </label>
                                     <input type='text' id='url' placeholder='ImgUrl/Optional' className='user-input'
                                         value={url} onChange={(e) => setUrl(e.target.value)} />
                                 </div>
