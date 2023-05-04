@@ -20,7 +20,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URL, () => {
+mongoose.connect("mongodb+srv://yashbomble:yash2002@cluster0.mt2buo2.mongodb.net/GymSystem", () => {
     console.log('Connected to MongoDB');
 })
 
@@ -224,20 +224,6 @@ app.post('/login', async (req, res) => {
 app.post('/addTrainer', async (req, res) => {
     const { name, category, phone,email } = req.body;
 
-    const emptyFields = [];
-
-    if (!name) emptyFields.push('name');
-    if (!category) emptyFields.push('category');
-    if (!phone) emptyFields.push('phone');
-    if (!email) emptyFields.push('email');
-   
-    if (emptyFields.length > 0) {
-        return res.json({
-            success: false,
-            message: `${emptyFields.join(', ')} are required`
-        })
-    }
-
     const trainer = new Trainer({
         name: name,
         category: category,
@@ -286,21 +272,6 @@ app.get('/users', async (req,res)=>{
 })
 app.post('/addexercise', async(req,res)=>{
     const {uname,day,exername,sets,imgUrl,dayId} = req.body;
-
-    const emptyFields = [];
-
-    if (!uname) emptyFields.push('uname');
-    if (!day) emptyFields.push('day');
-    if (!exername) emptyFields.push('exername');
-    if (!sets) emptyFields.push('imgUrl');
-   
-    if (emptyFields.length > 0) {
-        return res.json({
-            success: false,
-            message: `${emptyFields.join(', ')} are required`
-        })
-    }
-
     const exercise = new Exercise({
         uname: uname || null,
         day : day || null,
@@ -333,21 +304,6 @@ app.get('/viewexercise',async (req,res)=>{
 app.post('/contact',async (req,res)=>{
     const {name , email , message} = req.body;
    
-
-    const emptyFields = [];
-
-    if (!name) emptyFields.push('name');
-    if (!email) emptyFields.push('email');
-    if (!message) emptyFields.push('message');
-   
-    if (emptyFields.length > 0) {
-        return res.json({
-            success: false,
-            message: `${emptyFields.join(', ')} are required`
-        })
-    }
-
-
     if(!validator.isEmail(email))
     {
         return res.json({
