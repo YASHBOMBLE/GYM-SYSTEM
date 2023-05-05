@@ -64,7 +64,7 @@ async function validation()
             const response = await axios.post('/addexercise', {
                 uname: uname,
                 day: day.label,
-                exername: name.label,
+                exername: name,
                 sets: sets,
                 imgUrl: url,
                 price : price
@@ -156,7 +156,7 @@ async function validation()
                                 <Select options={Countries} id='class' placeholder='Select Day' className='user-input text-color' onChange={setDay} />
                                 <div>
                                     <label htmlFor='set'>Number of sets :  </label>
-                                    <input type='text' id='set' placeholder='Name' className='user-input'
+                                    <input type='text' id='set' placeholder='Sets' className='user-input'
                                         value={sets} onChange={(e) => setSets(e.target.value)}  required/>
                                 </div>
                                 <div>

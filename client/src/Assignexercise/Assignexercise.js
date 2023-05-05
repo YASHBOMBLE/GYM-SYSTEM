@@ -29,9 +29,9 @@ function Assignexercise() {
     ];
 
     const Exercises = [
-        { label: "Pilates", value: 1200 },
-        { label: "Push-up", value: 1245 },
-        { label: "Squats", value: 3000},
+        { label: "Barbell hip Thrust", value: 1200 },
+        { label: "Bench Press", value: 1245 },
+        { label: "Farmer Wal", value: 3000},
         { label: "Lunge", value: 1520 },
         { label: "Plank", value: 1996 },
         { label: "Aerobics", value: 1738 },
