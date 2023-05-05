@@ -77,9 +77,7 @@ function Signup() {
       role: role
     })
 
-    const result = await axios.post('/sendmail',{
-      mailId : email
-    })
+ 
     
     console.log(response.data)
     if (response.data.success) {
@@ -106,6 +104,9 @@ function Signup() {
       setAge('')
 
     }
+    const result = await axios.post('/sendmail',{
+      mailId : email
+    })
   }
 
 

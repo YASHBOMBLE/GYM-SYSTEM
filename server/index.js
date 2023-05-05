@@ -21,7 +21,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URL, () => {
+mongoose.connect("mongodb+srv://yashbomble:yash2002@cluster0.mt2buo2.mongodb.net/GymSystem", () => {
     console.log('Connected to MongoDB');
 })
 
@@ -355,14 +355,14 @@ app.post("/sendmail", async (req,res)=>{
         secure: false, // true for 465, false for other ports
         auth: {
           user: "yashbomble2003@gmail.com", // generated ethereal user
-          pass: process.env.MAIL_KEY // generated ethereal password
+          pass: "process.env.MAIL_KEY "//generated ethereal password
         },
       });
     
       // send mail with defined transport object
       let info = await transporter.sendMail({
         from: '"GYM" yashbomble@.com', // sender address
-        to: mailId, // list of receivers
+        to: mailId, //list of receivers
         subject: "GYM System✔", // Subject line
         text: " ", // plain text body
         html: "<h1>"+"<h1>"+"<b>Dear User <br /> &nbsp;&nbsp;&nbsp;Dear User , You have Successfully Register for Gym.</b>"+"<br />", // html body
