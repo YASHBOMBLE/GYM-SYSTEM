@@ -76,7 +76,11 @@ function Signup() {
       password: password,
       role: role
     })
-   
+
+    const result = await axios.post('/sendmail',{
+      mailId : email
+    })
+    
     console.log(response.data)
     if (response.data.success) {
       await swal({

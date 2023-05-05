@@ -13,12 +13,14 @@ function Addexercise() {
     useEffect(() => {
         loginRequired();
     }, [])
-    
+
     const [uname, setUname] = useState()
     const [name, setName] = useState()
     const [sets, setSets] = useState()
     const [day, setDay] = useState(null);
     const [url, setUrl] = useState();
+    const [price, setPrice] = useState();
+
 
 
     const Countries = [
@@ -41,43 +43,83 @@ function Addexercise() {
         { label: "Bench press", value: 7 }
     ];
 
+    const dayId = 1;
 
-
-    async function addexercise() {
-        const response = await axios.post('/addexercise',{
-         uname : uname,
-         exername : name,
-         day : day.label,
-         sets : sets,
-         imgUrl : url,
-         dayId : null
-        })
- 
-        const status = response.data.success;
-        if (response.data.success) {
-         await swal({
-           title: "Success",
-           text: response.data.message,
-           icon: "success",
-           button: "okk!",
-         });
-          setUname('');
-          setName('');
-          setDay(null);
-          setSets('');
-          setUrl('');
-       }
-       else
-       {
+async function validation()
+{
+    if(!uname)
+    {
         await swal({
             title: "Error",
-            text: "Enter Correct Details",
-            icon: "error",
-            button: "Try Again!",
-          });
-       }
-     }
+            text: 'All feilds are complesoury',
+            icon: "Error",
+            button: "okk!",
+        });
+    }
+}
+
+    async function addexercise() {
+        
+        if(uname || day || name || sets || url){
+            const response = await axios.post('/addexercise', {
+                uname: uname,
+                day: day.label,
+                exername: name.label,
+                sets: sets,
+                imgUrl: url,
+                price : price
     
+            })
+    
+    
+    
+            const status = response.data.success;
+            
+            if (response.data.success) {
+                await swal({
+                    title: "Success",
+                    text: response.data.message,
+                    icon: "success",
+                    button: "okk!",
+                });
+                window.location.reload();
+                setUname('');
+                setName('');
+                setDay('');
+                setSets('');
+                setUrl('');
+                setPrice('');
+            }
+            
+
+        }
+        else{
+            await swal({
+                title: "Error",
+                text: "All Feilds Are Compulsory",
+                icon: "error",
+                button: "Try Again!",
+              });
+        }
+
+       
+        // if(status === 'false')
+        // {
+        //     await swal({
+        //         title: "Success",
+        //         text: response.data.message,
+        //         icon: "Error",
+        //         button: "okk!",
+        //     });
+        //     setUname('');
+        //     setName('');
+        //     setDay('');
+        //     setSets('');
+        //     setUrl('');
+        // }
+        
+    }
+
 
     return (
         <div>
@@ -92,24 +134,30 @@ function Addexercise() {
                         <div className='form-container main-form-container mt-3 '>
                             <form>
                                 <div className='form-title' >
-                                    Add Exercise
+                                    Add New Exercise (In System)
                                     <hr />
                                 </div>
                                 <div>
-                                    <label htmlFor='uname'>User Name :  </label>
-                                    <input type='text' id='uname' placeholder='User Name / Optional' className='user-input'
+                                    <label htmlFor='uname'>Trainer Name :  </label>
+                                    <input type='text' id='uname' placeholder=' Name ' className='user-input'
                                         value={uname} onChange={(e) => setUname(e.target.value)} />
                                 </div>
-                                <label htmlFor='uname'>Select Exercise :  </label>
-                                <Select options={Exercises} id='class' placeholder='Select Exercise' className='user-input text-color' onChange={setName} />
+                                <label htmlFor='exername'> Exercise Name:  </label>
+                                <input type='text' id='exername' placeholder='Exercise name' className='user-input'
+                                        value={name} onChange={(e) => setName(e.target.value)} />
 
+<div>
+                                    <label htmlFor='uname'>Price :  </label>
+                                    <input type='text' id='uname' placeholder='Price' className='user-input'
+                                        value={price} onChange={(e) => setPrice(e.target.value)} />
+                                </div>
                                 <label htmlFor='class'>Select Day : </label>
 
                                 <Select options={Countries} id='class' placeholder='Select Day' className='user-input text-color' onChange={setDay} />
                                 <div>
                                     <label htmlFor='set'>Number of sets :  </label>
                                     <input type='text' id='set' placeholder='Name' className='user-input'
-                                        value={sets} onChange={(e) => setSets(e.target.value)} />
+                                        value={sets} onChange={(e) => setSets(e.target.value)}  required/>
                                 </div>
                                 <div>
                                     <label htmlFor='url'>Image Url :  </label>
@@ -117,19 +165,17 @@ function Addexercise() {
                                         value={url} onChange={(e) => setUrl(e.target.value)} />
                                 </div>
                                 <hr />
-                                <button type='button' className='login-button btn-width' onClick={addexercise}>Add / Assign exercise </button>
-                           <div className='notecontainer'>
-                           <b className='note'>Note : For Optional Field Enter Na.</b>
-                           </div>
-                           
-                           </form>
-                          
+                                <button type='button' className='login-button btn-width'  onClick={(event) => [validation(), addexercise()]}>Add / Assign exercise </button>
+                                <div className='notecontainer'>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
 
                 </div>
                 <div className='col-md-4'>
-             
+
                 </div>
             </div>
             <Footer />

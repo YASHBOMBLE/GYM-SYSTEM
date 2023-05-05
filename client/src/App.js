@@ -11,6 +11,10 @@ import Viewtrainer from './views/Viewtrainer/Viewtrainer.js';
 import Viewusers from './views/Viewusers/Viewusers.js';
 import Contactus from './views/Contactus/Contactus.js';
 import Messageview from './views/Messageview/Messageview.js';
+import Assignexercise from './Assignexercise/Assignexercise.js';
+import Viewpayment from './views/Viewpayment/Viewpayment.js';
+import Aboutus from './Aboutus/Aboutus.js';
+import Verifymail from './views/Verifymail/Verifymail.js';
 function App() {
   return (
     <div>
@@ -28,6 +32,14 @@ function App() {
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/messageview" element={<Messageview/>} />
+          <Route path="/assignexercise" element={<Assignexercise/>} />
+          <Route path="/payment" element={<Viewpayment/>} />
+          <Route path="/about" element={<Aboutus/>} />
+          <Route path="/verifymail" element={<Verifymail/>} />
+
+
+
+
         </Routes>
       </BrowserRouter>
     </div>

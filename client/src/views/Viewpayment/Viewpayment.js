@@ -1,32 +1,33 @@
-import React,{useState,useEffect} from 'react'
-import { loginRequired } from '../../util/LoginRequired';
-import axios from 'axios';
-import Navbar from '../../component/Navbar/Navbar';
-import Footer from '../../component/Footer/Footer';
-function Messageview() {
-
-    const [currentmessage, setAllmessage] = useState([])
+import React ,{useEffect,useState}from 'react'
+import './Viewpayment.css'
+import { loginRequired } from '../../util/LoginRequired'
+import axios from 'axios'
+import Footer from '../../component/Footer/Footer'
+import Navbar from '../../component/Navbar/Navbar'
+function Viewpayment() {
+    const [currentpayment, setAllpayment] = useState([])
 
     useEffect(() => {
         loginRequired();
     }, [])
 
-    async function fetchAllMessages() {
-        const response = await axios.get('/viewmessage')
-        setAllmessage(response.data.data)
+    async function fetchAllPayment() {
+        const response = await axios.get('/viewnewassignexercise')
+        setAllpayment(response.data.data)
     }
     useEffect(() => {
-        fetchAllMessages();
+        fetchAllPayment();
     }, [])
-
-
   return (
-    <div>
 
-<Navbar />
+    
+
+
+    <div>
+        <Navbar />
             <div className='row'>
                 <div className='col-md-12'>
-                    <div className='text-center trainer-title'>All Message Details</div>
+                    <div className='text-center trainer-title'>All Payment Details</div>
                 </div>
             </div>
             <hr  className='mb-4'/>
@@ -37,20 +38,22 @@ function Messageview() {
                     <tr>
                         <th scope="col">Sr.No</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Message</th> 
+                        <th scope="col">Exercise</th>
+                        <th scope="col">Payable Amount</th>  
                     </tr>
                 </thead>
                 {
-                    currentmessage?.map((index, item) => {
+                    currentpayment?.map((index, item) => {
                         return (
                             <>
                                 <tbody>
                                     <tr>
                                         <th scope="row">{item + 1}</th>
                                         <th scope="row">{index.name}</th>
-                                        <th scope="row">{index.email}</th>
-                                        <th scope="row">{index.message}</th>
+                                        <th scope="row">{index.exer}</th>
+
+                                        <th scope="row">{index.amount} /- Rs.</th>
+                                         
                                     </tr>
                                 </tbody>
                             </>
@@ -60,10 +63,9 @@ function Messageview() {
 </table>
                 </div>
             </div>
-           <Footer />
-
+            <Footer />
     </div>
   )
 }
 
-export default Messageview
+export default Viewpayment

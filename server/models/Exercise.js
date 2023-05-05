@@ -6,6 +6,7 @@ const exerciseSchema = new Schema({
   exername : String,
   sets : String,
   imgUrl : String,
+  price : String,
   dayId : String
 }, { timestamps: true },{Location:true})
 

@@ -8,7 +8,7 @@ import Footer from '../../component/Footer/Footer';
 import { currentUser } from './../../util/currentUser'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
-
+import { Link } from 'react-router-dom';
 function Home() {
 
   const [currentExercise, setAllexercise] = useState([])
@@ -87,6 +87,8 @@ function Home() {
           </div>
         </div>
       </div>
+
+      
       <div className='row mt-4'>
         <div className='col-md-6'>
           <div className='text-center home-title'>Days</div>
@@ -106,7 +108,7 @@ function Home() {
             }
           </div>
         </div>
-       
+
         <div className='col-md-6'>
           <div className='text-center home-title'>Exercise</div>
           <div className='Dayscontainer exer-container'>
@@ -133,26 +135,51 @@ function Home() {
         </div>
       </div>
       <hr />
-      <div className='row'>
+      <div className='row mb-2'>
 
+    
 
-        {
-          currentExercise?.map((index, item) => {
-            const url = index.imgUrl;
-            return (
-              <>
-                <div className='col-md-3'>
-                  <div className='card-container'>
-                    <span className='d-block mt-3'>{index.exername}</span>
-                    <img src={url} className='img-fluid card-img' />
-                    <span className='d-block mt-3'>Sets : {index.sets}</span>
+          {
+            currentExercise?.map((index, item) => {
+              const url = index.imgUrl;
+              return (
+                <>
+                  <div class="team-container col-md-3">
+                    <div class="team-card">
+
+                      <div class="team-content">
+                    <h4 className='d-block mt-3'>{index.exername}</h4>
+
+                        <Link to='/assignexercise'><img src={url} className='img-fluid card-img' /></Link>
+
+                        <div class="">
+                          <span className='d-block mt-3'>Sets : {index.sets}</span>
+                          <span className='mt-3'>Price : {index.price} /-</span>
+
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
 
-                </div>
-              </>
-            )
-          })
-        }
+
+
+
+                  {/* <div className='col-md-3'>
+                  <div className='card-container'>
+                    <h4 className='d-block mt-3'>{index.exername}</h4>
+                    <Link to='/assignexercise'><img src={url} className='img-fluid card-img' /></Link>
+                    <span className='d-block mt-3'>Sets : {index.sets}</span>
+                    <span className='mt-3'>Price : {index.price} /-</span>
+
+                  </div>
+
+                </div> */}
+                </>
+              )
+            })
+          }
+
       </div>
       <div class="d-grid gap-2 logout-btn">
         <button type="button" className='btn btn-primary' onClick={logOut}><p className='logOut-text'>Logout</p><i class="fa-solid fa-right-from-bracket"></i></button>

@@ -8,6 +8,7 @@ import User from './models/User.js'
 import Trainer from './models/Trainer.js';
 import Contact from './models/Contact.js';
 import Exercise from './models/Exercise.js'
+import Assignexer from './models/Assignexer.js';
 import nodemailer from 'nodemailer'
 import path from 'path';
 const __dirname = path.resolve();
@@ -25,106 +26,54 @@ mongoose.connect("mongodb+srv://yashbomble:yash2002@cluster0.mt2buo2.mongodb.net
 })
 
 //api route start here
-app.post('/sendmail', (req, res) => {
-    const mail = req.body;
+// app.post('/sendmail', (req, res) => {
+//     const mail = req.body;
 
-    async function main() {
-        // Generate test SMTP service account from ethereal.email
-        // Only needed if you don't have a real mail account for testing
-        let testAccount = await nodemailer.createTestAccount();
+//     async function main() {
+//         // Generate test SMTP service account from ethereal.email
+//         // Only needed if you don't have a real mail account for testing
+//         let testAccount = await nodemailer.createTestAccount();
 
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: "yashbomble2003@gmail.com", // generated ethereal user
-                pass: "" // generated ethereal password
-            },
-        });
+//         // create reusable transporter object using the default SMTP transport
+//         let transporter = nodemailer.createTransport({
+//             host: "smtp.gmail.com",
+//             port: 587,
+//             secure: false, // true for 465, false for other ports
+//             auth: {
+//                 user: "yashbomble2003@gmail.com", // generated ethereal user
+//                 pass: "" // generated ethereal password
+//             },
+//         });
 
-        // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: '"Yash" yashbomble@.com', // sender address
-            to: "yashbomble2002@gmail.com", // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>This is testing</b><button>Test Mail </button>", // html body
-        });
+//         // send mail with defined transport object
+//         let info = await transporter.sendMail({
+//             from: '"Yash" yashbomble@.com', // sender address
+//             to: "yashbomble2002@gmail.com", // list of receivers
+//             subject: "Hello ✔", // Subject line
+//             text: "Hello world?", // plain text body
+//             html: "<b>This is testing</b><button>Test Mail </button>", // html body
+//         });
 
-       // console.log("Message sent: %s", info.messageId);
+//        // console.log("Message sent: %s", info.messageId);
 
-        res.json({
-            success : true,
-            message : "Otp sent",
-            data : info.messageId
-        })
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+//         res.json({
+//             success : true,
+//             message : "Otp sent",
+//             data : info.messageId
+//         })
+//         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-        // Preview only available when sending through an Ethereal account
-        //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-    }
+//         // Preview only available when sending through an Ethereal account
+//         //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+//         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+//     }
 
-    main().catch(console.error);
+//     main().catch(console.error);
 
-})
+// })
 
 
 app.post('/validate',async(req,res)=>{
-    const { name, phone, email, password, role } = req.body;
-//Name VAlidation
-    if(!validator.isAlpha(name) )
-    {
-        return res.json({
-            success: false,
-            message: "Name is in String"
-        })
-    }
-   
-    
-    
-    //password validation
-
-    if(!validator.isStrongPassword(password))
-    {
-        return res.json({
-            success: false,
-            message: "Password Contains letters A-Z a-z 0-9 or Special Symbol (minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1)"
-        })
-    }
-    
-    //Email validation
-  
-    
-    
-//Phone number Validation
-    if(validator.isAlpha(phone))
-    {
-        return res.json({
-            success: false,
-            message: "Mobile number Must be in Digit"
-        })
-    }
-   
-
-    if (phone.length < 10 || phone.length >= 11) {
-        return res.json({
-            success: false,
-            message: "Mobile No Must be 10 Digit"
-        })
-    }
-
-    res.json({
-        success: true,
-        message: "User created successfully"
-    })
-})
-
-//validation api
-
-app.post('/signup', async (req, res) => {
     const { name, phone, email, password, weight, age, role } = req.body;
    
     // validation to check if all fields are filled starts here
@@ -143,6 +92,32 @@ app.post('/signup', async (req, res) => {
             message: `${emptyFields.join(', ')} are required`
         })
     }
+
+
+  if(!validator.isStrongPassword(password))
+  {
+    return res.json({
+        success: false,
+        message: "A-Z,0-9 ,a-z, @ "
+    })
+  }
+
+
+
+    res.json({
+        success: true,
+        message: "Validate successfully"
+    })
+})
+
+//validation api
+
+app.post('/signup', async (req, res) => {
+    const { name, phone, email, password, weight, age, role } = req.body;
+   
+    // validation to check if all fields are filled starts here
+   
+
     // validation to check if all fields are filled ends here
 
    
@@ -197,6 +172,14 @@ app.post('/signup', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
+    if(!validator.isStrongPassword(password))
+    {
+      return res.json({
+          success: false,
+          message: "A-Z,0-9 ,a-z, @ "
+      })
+    }
+
     if (!email || !password) {
         return res.json({
             success: false,
@@ -223,6 +206,16 @@ app.post('/login', async (req, res) => {
 
 app.post('/addTrainer', async (req, res) => {
     const { name, category, phone,email } = req.body;
+
+
+    if(!validator.isAlpha(name) || validator.isAlpha(category) )
+    {
+        return res.json({
+            success: false,
+            message: "Name Or category is in String "
+        })
+    }
+    
 
     const trainer = new Trainer({
         name: name,
@@ -271,14 +264,24 @@ app.get('/users', async (req,res)=>{
     })
 })
 app.post('/addexercise', async(req,res)=>{
-    const {uname,day,exername,sets,imgUrl,dayId} = req.body;
+    const {uname,day,exername,sets,imgUrl,price} = req.body;
+
+  if(!validator.isURL(imgUrl)) 
+  {
+    return res.json({
+        success: false,
+        message: "Enter Valid Url"
+    })
+  }  
+
     const exercise = new Exercise({
-        uname: uname || null,
-        day : day || null,
-        exername : exername || null,
-        sets : sets || null,
-        imgUrl : imgUrl || null,
-        dayId : dayId || null
+        uname: uname,
+        day : day,
+        exername : exername,
+        sets : sets,
+        imgUrl : imgUrl,
+        price : price
+   
     })
 
     const savedExercise = await exercise.save();
@@ -352,7 +355,7 @@ app.post("/sendmail", async (req,res)=>{
         secure: false, // true for 465, false for other ports
         auth: {
           user: "yashbomble2003@gmail.com", // generated ethereal user
-          pass: "proccess.env.MAIL_KEY" // generated ethereal password
+          pass: "ehutwdxuxvfzzfvd" // generated ethereal password
         },
       });
     
@@ -360,9 +363,9 @@ app.post("/sendmail", async (req,res)=>{
       let info = await transporter.sendMail({
         from: '"GYM" yashbomble@.com', // sender address
         to: mailId, // list of receivers
-        subject: "OTP Verification ✔", // Subject line
+        subject: "GYM System✔", // Subject line
         text: " ", // plain text body
-        html: "<b>Your Otp for Mail Verification is </b>"+"<h1>"+otp+"<h1>", // html body
+        html: "<h1>"+"<h1>"+"<b>Dear User <br /> &nbsp;&nbsp;&nbsp;Dear User , You have Successfully Register for Gym.</b>"+"<br />", // html body
       });
     
       if(info)
@@ -370,7 +373,7 @@ app.post("/sendmail", async (req,res)=>{
         return res.json({
           success : true,
           message : "mail sent",
-          data : info.messageId
+          data : otp
         })
       }else
       {
@@ -390,6 +393,40 @@ app.post("/sendmail", async (req,res)=>{
     main().catch(console.error);
   })
   
+app.post('/assignexer', async(req,res)=>{
+    const {ID,name,exer,amount} = req.body;
+
+   
+
+    const assignexercise = new Assignexer({
+        ID :ID,
+        name : name,
+        exer : exer,
+        amount : amount
+   
+    })
+
+    const savedExercises = await assignexercise.save();
+   
+        res.json({
+            success: true,
+            message: "Success",
+            data: savedExercises
+        })
+    
+
+})
+
+app.get('/viewnewassignexercise', async(req,res)=>{
+    const exer = await Assignexer.find();
+
+    res.json({
+        success : true,
+        message : "success",
+        data : exer
+    }) 
+
+})
 
 //api routes end here
 

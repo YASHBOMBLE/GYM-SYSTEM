@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from 'react'
 import { currentUser } from '../../util/currentUser'
 import Footer from '../../component/Footer/Footer';
 import Navbar from '../../component/Navbar/Navbar';
@@ -6,7 +6,7 @@ import { loginRequired } from '../../util/LoginRequired';
 import './Profile.css'
 import user from './../../images/user.png'
 import Select from 'react-select';
-
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function Profile() {
@@ -22,11 +22,22 @@ function Profile() {
   }
   
  
+  const [currentpayment, setAllpayment] = useState([])
+  const [currentpaymentid, setCurretnp] = useState()
 
-  function viewexercise(){
-    window.location.href='/viewexercise'
+
+  useEffect(() => {
+      loginRequired();
+  }, [])
+
+  async function fetchAllPayment() {
+      const response = await axios.get('/viewnewassignexercise')
+      setAllpayment(response.data.data)
   }
-  
+  useEffect(() => {
+      fetchAllPayment();
+  }, [])
+ 
   
   function adminView() {
   
@@ -43,6 +54,8 @@ function Profile() {
                     <Link to ='/viewexercise'> <button className='btn btn-primary witd-btn' >View Exercise</button></Link>
                     <Link to ='/vewTrainer'> <button className='btn btn-primary witd-btn' >View Trainer</button></Link>
                     <Link to ='/vewUsers'> <button className='btn btn-primary witd-btn' >View User</button> </Link>
+                    <Link to ='/payment'> <button className='btn btn-primary witd-btn' >Payments</button> </Link>
+                    
                     <Link to ='/messageview'> <button className='btn btn-primary witd-btn' >View Messages</button> </Link>
                 </div>
   
@@ -55,7 +68,7 @@ function Profile() {
   return (
     <div>
       <Navbar />
-     <div className='row'>
+       <div className='row'>
                 <div className='col-md-12 main-container'>
                     <div className='sub-container'>
                     

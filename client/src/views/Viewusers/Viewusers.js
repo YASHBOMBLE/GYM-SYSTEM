@@ -35,7 +35,7 @@ function Viewusers() {
       </div>
       <div className='row'>
         <div className='col-md-12'>
-          <table class="table  table-hover">
+          <table class="table table-dark table-hover">
             <thead>
               <tr>
                 <th scope="col">Sr.No</th>

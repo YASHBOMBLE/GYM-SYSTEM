@@ -27,27 +27,44 @@ function Addtrainer() {
         
     ];
     async function addTrainer() {
-       const response = await axios.post('/addTrainer',{
-        name : name,
-        category : category.label,
-        phone : mono,
-        email : email
-       })
 
-       const status = response.data.success;
-       if (response.data.success) {
+        if(name || category || mono || email)
+        {
+            const response = await axios.post('/addTrainer',{
+                name : name,
+                category : category.label,
+                phone : mono,
+                email : email
+               })
+        
+               const status = response.data.success;
+               if (response.data.success) {
+        
+                await swal({
+                  title: "Success",
+                  text: response.data.message,
+                  icon: "success",
+                  button: "okk!",
+                });
 
-        await swal({
-          title: "Success",
-          text: response.data.message,
-          icon: "success",
-          button: "okk!",
-        });
-         setEmail('');
-         setName('');
-         setCategory(null);
-         setMono('');
-      }
+                window.location.reload();
+                 setEmail('');
+                 setName('');
+                 setCategory(null);
+                 setMono('');
+              }
+        }
+        else
+        {
+            await swal({
+                title: "Error",
+                text: "All Feilds Are Compulsory",
+                icon: "error",
+                button: "Try Again!",
+              });
+        }
+
+      
     }
 
 
