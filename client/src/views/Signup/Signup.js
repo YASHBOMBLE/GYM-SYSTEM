@@ -82,15 +82,16 @@ function Signup() {
     console.log(response.data)
     if (response.data.success) {
 
-const result = await axios.post('/sendmail',{
-      mailId : email
-    })
+
       await swal({
         title: "Success",
         text: response.data.message,
         icon: "success",
         button: "Aww yiss!",
       });
+const result = await axios.post('/sendmail',{
+      mailId : email
+    })
       window.location.href = '/login'
     }
     else {
