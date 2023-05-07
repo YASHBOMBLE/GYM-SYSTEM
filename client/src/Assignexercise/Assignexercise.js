@@ -29,13 +29,10 @@ function Assignexercise() {
     ];
 
     const Exercises = [
-        { label: "Barbell hip Thrust", value: 1200 },
-        { label: "Bench Press", value: 1245 },
-        { label: "Farmer Wal", value: 3000},
-        { label: "Lunge", value: 1520 },
-        { label: "Plank", value: 1996 },
-        { label: "Aerobics", value: 1738 },
-        { label: "Bench press", value: 1212 }
+        { label: "Barbell hip thrust", value: 1250 },
+        { label: "Bench press", value: 2532 },
+        { label: "Farmer Walk", value: 5241 },
+        { label: "Deadlift", value: 2320 }
     ];
 
     
