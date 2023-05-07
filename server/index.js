@@ -120,7 +120,13 @@ app.post('/signup', async (req, res) => {
 
     // validation to check if all fields are filled ends here
 
-   
+   if(!validator.isStrongPassword(password))
+    {
+      return res.json({
+          success: false,
+          message: "Password contains A-Z,0-9 ,a-z, @"
+      })
+    }
 
     // validation to check if email already exists starts here
      const existingUser = await User.findOne({ email: email });
@@ -172,13 +178,7 @@ app.post('/signup', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    if(!validator.isStrongPassword(password))
-    {
-      return res.json({
-          success: false,
-          message: "A-Z,0-9 ,a-z, @ "
-      })
-    }
+    
 
     if (!email || !password) {
         return res.json({
