@@ -120,7 +120,26 @@ app.post('/signup', async (req, res) => {
 
     // validation to check if all fields are filled ends here
 
-   if(!validator.isStrongPassword(password))
+    if(!validator.isEmail(email))
+
+    {
+        return res.json({
+            success: false,
+            message: "Please enter valid email",
+            
+        })
+    } 
+if(!validator.isMobilePhone(phone))
+    {
+        return res.json({
+            success: false,
+            message: "Mobile must contain 10 digit",
+            
+        })
+    }
+
+
+  if(!validator.isStrongPassword(password))
     {
       return res.json({
           success: false,
