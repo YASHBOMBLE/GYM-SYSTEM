@@ -66,7 +66,10 @@ function Signup() {
 
   async function signupUser() {
    
-    
+    const result = await axios.post('/sendmail',{
+      mailId : email
+    })
+
     const response = await axios.post('/signup', {
       name: name,
       email: email,
@@ -89,9 +92,7 @@ function Signup() {
         icon: "success",
         button: "Aww yiss!",
       });
-const result = await axios.post('/sendmail',{
-      mailId : email
-    })
+
       window.location.href = '/login'
     }
     else {
